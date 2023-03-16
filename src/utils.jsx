@@ -1,0 +1,75 @@
+// Dummy card data for Home View
+
+const cards = [
+  {
+    id: 1,
+    title: "Alberto",
+    description:
+      "Estoy en clases con Vanessa desde hace ya más de tres años y la recomiendo dando fe de su responsabilidad, profesionalismo, capacidad de adaptarse a muy distintas necesidades musicales y sobre todo una enorme paciencia y cariño por lo que hace, pero también desde la vereda técnica es muy fuerte, con amplio bagaje y adaptándose a las necesidades más diversas que uno le pueda plantear. Tiene la cóclea ajustada al miliherzio, no pasarás gato por liebre con nota alguna (aunque a veces es divertido intentarlo). Estoy muy contento y agradecido de trabajar con ella",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 2,
+    title: "Fernando",
+    description:
+      "Considero que realiza una excelente labor en diversos aspectos. En primer termino, permite el acercamiento al canto de manera amable, analizando las condiciones y habilidades de cada uno, brinda la confianza suficiente para perder miedos con la voz, trabajando constantemente para que el estudiante avance, motiva a cada instante, evitando que la frustracion se presente a invadir el canto. La clase se vuelve personalizada al maximo, escucha, es paciente, muy pedagoga, ademas de un oido increible. Calidad, tecnica, profesionalismo, cercania, progreso, constancia y disciplina. Recomendada a mas no poder, seguire trabajando junto a ella.",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 3,
+    title: "Miguel",
+    description:
+      "Vanessa con sus clases ha cambiado mi musicalidad: sabe mucho de su área de conocimiento, incentiva a mejorar constantemente entregando tareas para avanzar en los días en que uno no tiene clase y además lo paso fenomenal. Para mí ha sido maestra y productora musical, incluso me ha ayudado con mis composiciones. Desde el extranjero sigo tomando clases online con ella y seguiré con mi maestra. ¡Gracias!",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 4,
+    title: "Lilian D.",
+    description:
+      "Vanessa es una super profe, es profesional, sabe exactamente qué hacer para que vayas logrando realmente sacar la voz y cantar. Además tiene la paciencia que un alumno necesita que le tengan. Hace que una hora de canto pase volando y siempre quieras más. Siento que he aprendido un montón y que puedo hacer más de lo que creí con mi voz. Ella es una mujer tan dulce como rigurosa para enseñar y en sus clases está 100% conectada contigo y tu voz. Es seca. ¡Yo la adoro!",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 5,
+    title: "Jose Luis Z.",
+    description:
+      "Excelente experiencia, una profesora muy profesional pero cercana a la vez, te explica y vas viendo los avances en el canto. LLevamos 3 años en clases. Totalmente recomendable 👏🏻👏🏻👏🏻",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 6,
+    title: "Card 6",
+    description: "This is the description for card 5.",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 7,
+    title: "Card 7",
+    description: "This is the description for card 5.",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+  {
+    id: 8,
+    title: "Card 8",
+    description: "This is the description for card 5.",
+    image:
+      "https://images.radio.com/aiu-media/gettyimages-1090822884-a1e7d08d-2cce-49e9-9048-e52c4346021a.jpg",
+    link: "https://www.angrymetalguy.com/",
+  },
+];
+
+export default cards;
