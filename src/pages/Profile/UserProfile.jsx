@@ -26,7 +26,7 @@ function UserProfile() {
         <div className="flex flex-col md:flex-row items-center md:justify-start font-proxima text-gray-200 text-center my-7">
           <img
             className="w-[300px] h-[300px] rounded-full md:mr-[70px] mb-5 md:mb-0"
-            src="/src/assets/img/800px-Symphony_x_10.jpg"
+            src="/img/800px-Symphony_x_10.jpg"
             alt="userPhoto"
           />
           <div className="flex flex-col items-start font-proxima text-xl">

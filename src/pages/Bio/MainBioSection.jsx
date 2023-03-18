@@ -4,7 +4,7 @@ function MainBioSection() {
       <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start md:justify-between mb-5">
         <img
           className="w-[500px] mr-5"
-          src="/src/assets/img/VanessaSoprano.jpg "
+          src="/img/VanessaSoprano.jpg "
           alt="vanessa-soprano"
         />
         <div className="ml-5 mt-10 xl:mt-0">

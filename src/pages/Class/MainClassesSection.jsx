@@ -19,7 +19,7 @@ function MainClassesSection() {
       <div className="flex flex-col xl:flex-row  justify-center items-center xl:items-start md:justify-between mb-10">
         <img
           className="w-[500px] mb-5 md:mr-5 xl:mb-0"
-          src="/src/assets/img/online-lessons.jpg"
+          src="/img/online-lessons.jpg"
           alt="vanessa-soprano"
         />
         <div className="text-center md:text-start mx-2 md:mx-0 md:ml-5">
@@ -46,7 +46,7 @@ function MainClassesSection() {
       <div className="flex flex-col xl:flex-row  justify-center items-center xl:items-start md:justify-between mb-5 mt-10">
         <img
           className="w-[500px] mb-5 md:mr-5 xl:mb-0"
-          src="/src/assets/img/studio-lessons.jpg"
+          src="/img/studio-lessons.jpg"
           alt="vanessa-soprano"
         />
         <div className="text-center md:text-start mx-2 md:mx-0 md:ml-5">

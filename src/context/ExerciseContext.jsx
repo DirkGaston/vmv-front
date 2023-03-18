@@ -7,7 +7,7 @@ export const ExerciseProvider = ({ children }) => {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
-    axios.get("/src/api/exercises/exercises.json").then((res) => {
+    axios.get("/data/exercises.json").then((res) => {
       setExercises(res.data);
     });
   }, []);

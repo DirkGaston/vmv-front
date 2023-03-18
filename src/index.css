@@ -111,7 +111,7 @@ body::before {
 }
 
 body {
-  background-image: url("/src/assets/img/purple-cosmos-stars-space.jpg");
+  background-image: url("/img/purple-cosmos-stars-space.jpg");
   background-repeat: no-repeat, repeat;
   background-position: center;
   background-size: auto 100vh;
@@ -120,7 +120,7 @@ body {
 
 @media only screen and (min-width: 1600px) {
   body {
-    background-image: url("/src/assets/img/purple-cosmos-stars-space.jpg");
+    background-image: url("/img/purple-cosmos-stars-space.jpg");
     background-repeat: no-repeat, repeat;
     background-position: center;
     background-size: 100vw 100vh;

@@ -43,7 +43,7 @@ export default function Navbar() {
         <NavLink to={"/"}>
           <div className="flex items-center">
             <img
-              src="/src/assets/img/vmv-logo.png"
+              src="/img/vmv-logo.png"
               className="h-12 mr-3"
               alt="VMV Logo"
             />
