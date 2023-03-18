@@ -16,14 +16,13 @@ _Este proyecto fue desarrollado como **PROYECTO FINAL** para el bootcamp **Desar
 
 ## Descripción Proyecto 📖
 
-**VMV** una plataforma de gestión para una profesora particular de canto.
+**VMV** es una plataforma de gestión diseñada específicamente para profesores particulares de canto y sus estudiantes. La aplicación tiene como objetivo proporcionar a los usuarios una experiencia de aprendizaje personalizada y de alta calidad. La plataforma cuenta con una amplia galería de ejercicios vocales clasificados según su nivel de dificultad y grado de experiencia, lo que permite a los usuarios seleccionar y practicar aquellos que mejor se adapten a sus necesidades. Además, estos ejercicios están disponibles de manera gratuita para todos los usuarios registrados en la plataforma.
 
-La plataforma consta de una galería de ejercicios vocales de distintas categorías y grados de experiencia, gratuitos y al alcance de todos los usuarios con tan sólo registrarse.
-Para los usuarios registrados que además toman clases particulares con la profesora, existe también la posibilidad de subir grabaciones de los ejercicios a la plataforma y recibir feedback personalizado con tal de monitorizar progreso.
+Para aquellos usuarios que toman clases particulares con la profesora, VMV ofrece una función adicional que les permite subir grabaciones de sus ejercicios vocales a la plataforma para recibir feedback personalizado y seguimiento del progreso. Esta característica permite a la profesora hacer un seguimiento del progreso de cada uno de sus estudiantes y ajustar su plan de enseñanza de acuerdo a las necesidades específicas de cada uno de ellos. De esta manera, los estudiantes pueden recibir una atención personalizada y desarrollar habilidades vocales de manera más efectiva.
 
 ## Herramientas 🛠️
 
-**FutScript** has been built using:
+**VMV** se ha construido con:
 
 - [React](https://reactjs.org/)
 - [React Router](https://reactrouter.com/en/main)
@@ -34,8 +33,26 @@ Para los usuarios registrados que además toman clases particulares con la profe
 Las dependencias utilizadas son, entre otras:
 
 - [Axios](https://axios-http.com/) - Cliente HTTP simple basado en promesas.
-- [React Player](hhttps://www.npmjs.com/package/react-player) - Componente React para reproducir archivos multimedia.
+- [React Player](https://www.npmjs.com/package/react-player) - Componente React para reproducir archivos multimedia.
 - [Swiper](https://swiperjs.com/react) - Librería de JavaScript para crear carruseles de imágenes y otros elementos de contenido en sitios web.
+- [Yup](https://www.npmjs.com/package/yup) - Validación de schemas de datos.
+- [React Hook Form](https://react-hook-form.com/) - Componente React para control de formularios.
+
+## Instalación de Dependencias 🚀
+
+```bash
+yarn
+# o
+npm install
+```
+
+## Levantar Servidor de Desarrollo
+
+```bash
+yarn dev
+# o
+npm run dev
+```
 
 ## Contacto 📫
 

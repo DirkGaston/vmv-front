@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "user_id": 3,
+    "exercise_id": 1,
+    "recording_url": "https://www.youtube.com/watch?v=s_0u1ax79Ek&t=47s&ab_channel=Loudwire",
+    "created_at": ""
+  },
+  {
+    "id": 2,
+    "user_id": 4,
+    "exercise_id": 2,
+    "recording_url": "https://www.youtube.com/watch?v=FMFU2RYh-eE",
+    "created_at": ""
+  },
+  {
+    "id": 3,
+    "user_id": 4,
+    "exercise_id": 5,
+    "recording_url": "https://www.youtube.com/watch?v=QcQGXZ8Da40",
+    "created_at": ""
+  }
+]

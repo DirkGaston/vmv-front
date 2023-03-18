@@ -1,15 +1,14 @@
-import { useState } from "react";
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+
 import "../assets/css/navbar.css";
 
-import Context from "../context/Context";
+import { NavbarContext } from "../context/NavbarContext";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Navbar() {
-  const context = useContext(Context);
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const { navbarOpen, setNavbarOpen } = useContext(NavbarContext);
+
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
 
   return (
@@ -133,7 +132,7 @@ export default function Navbar() {
             </li>
             <li className="nav-item flex">
               <NavLink
-                to={"/plataforma"}
+                to={"/login"}
                 className={({ isActive }) =>
                   isActive
                     ? "text-white font-proxima font-bold italic px-3 py-2 flex items-center text-xl"

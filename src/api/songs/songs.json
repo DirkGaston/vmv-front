@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "user_id": 2,
+    "song_title": "GMF",
+    "artist": "John Grant",
+    "is_practicing": true,
+    "recording_url": "",
+    "created_at": ""
+  },
+  {
+    "id": 2,
+    "user_id": 3,
+    "song_title": "I Am The Black Wizards",
+    "artist": "Emperor",
+    "is_practicing": true,
+    "recording_url": "",
+    "created_at": ""
+  },
+  {
+    "id": 3,
+    "user_id": 4,
+    "song_title": "King of Terrors",
+    "artist": "Symphony X",
+    "is_practicing": true,
+    "recording_url": "",
+    "created_at": ""
+  }
+]
