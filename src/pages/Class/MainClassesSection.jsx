@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CTAButton from "../../components/UI/Buttons/CTAButton";
 
 function MainClassesSection() {
@@ -34,8 +35,11 @@ function MainClassesSection() {
             micrófono) y una buena conexión a internet. Y, por supuesto, muchas
             ganas de aprender y progresar!
           </p>
+
           <div className="flex justify-center md:block">
-            <CTAButton text={"Agenda tu Clase"} />
+            <Link to="/contact">
+              <CTAButton text={"Agenda tu Clase"} />
+            </Link>
           </div>
         </div>
       </div>
@@ -54,8 +58,11 @@ function MainClassesSection() {
             sesiones en vivo en mi sala de clases, para sacar el máximo provecho
             a tu voz y oído!
           </p>
+
           <div className="flex justify-center md:block">
-            <CTAButton text={"Agenda tu Sesión"} />
+            <Link to="/contact">
+              <CTAButton text={"Agenda tu Sesión"} />
+            </Link>
           </div>
         </div>
       </div>

@@ -8,10 +8,18 @@ export async function UserLogin(email, password) {
       password,
     };
     const res = await axios.post(
-      "https://run.mocky.io/v3/2498e796-5d7d-4edb-a6be-6b7ca4d3ae6b",
+      "https://run.mocky.io/v3/9eab2033-a976-4d8e-bc44-49f990b3e786",
       payload
     );
     const data = res.data;
+
+    const isAdmin = email === "admin@vmv.com" && password === "garroshino";
+    if (isAdmin) {
+      localStorage.setItem("isAdmin", true);
+    } else {
+      localStorage.removeItem("isAdmin");
+    }
+
     localStorage.setItem("token", AESEncrypt(data.token));
     console.log(data);
     return data;
@@ -25,15 +33,13 @@ export async function GetUsers() {
     const token = localStorage.getItem("token");
     const decryptedToken = AESDecrypt(token);
 
-    const res = await axios.get(
-      "https://run.mocky.io/v3/4497928d-849b-4ae1-a25c-03ca0a5444c2",
-      {
-        headers: {
-          Authorization: `Bearer ${decryptedToken}`,
-        },
-      }
-    );
-
+    const res = await axios.get("/auth.json", {
+      headers: {
+        Authorization: `Bearer ${decryptedToken}`,
+      },
+    });
+    const data = res.data.user;
+    console.log(data);
     return res.data;
   } catch (err) {
     console.log(err);

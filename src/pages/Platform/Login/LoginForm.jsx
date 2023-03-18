@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
-  const { setUser } = useContext(AuthContext);
+  const { setUser, setHasToken, setIsAdmin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -37,7 +37,16 @@ function LoginForm() {
     try {
       await UserLogin(data.email, data.password);
       setUser({ isAuthenticated: true });
-      navigate("/user");
+
+      if (localStorage.getItem("isAdmin")) {
+        setIsAdmin(true);
+      }
+
+      if (localStorage.getItem("token")) {
+        setHasToken(true);
+      }
+
+      navigate(localStorage.getItem("isAdmin") ? "/admin" : "/user");
     } catch (error) {
       console.error(error);
     }

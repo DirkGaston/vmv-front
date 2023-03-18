@@ -1,7 +1,7 @@
 function MainBioSection() {
   return (
     <div className="flex flex-col w-full lg:w-3/4 mt-10">
-      <div className="flex flex-col xl:flex-row  justify-center items-center xl:items-start md:justify-between mb-5">
+      <div className="flex flex-col xl:flex-row justify-center items-center xl:items-start md:justify-between mb-5">
         <img
           className="w-[500px] mr-5"
           src="/src/assets/img/VanessaSoprano.jpg "

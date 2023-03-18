@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ReactPlayer from "react-player";
 import VideoPlayer from "../../components/Multimedia/VideoPlayer";
 import MainBioSection from "./MainBioSection";
@@ -12,9 +13,15 @@ function Bio() {
           Algunas de mis presentaciones
         </h2>
       </div>
-      <VideoPlayer url={"https://www.youtube.com/watch?v=3c8z0TDxuXQ&feature=youtu.be&ab_channel=FundacionVillanueva"} />
+      <VideoPlayer
+        url={
+          "https://www.youtube.com/watch?v=3c8z0TDxuXQ&feature=youtu.be&ab_channel=FundacionVillanueva"
+        }
+      />
       <div className="my-[30px]"></div>
-      <CTAButton text={"Agenda una Clase"} />
+      <Link to="/contact">
+        <CTAButton text={"Agenda una Clase"} />
+      </Link>
     </div>
   );
 }

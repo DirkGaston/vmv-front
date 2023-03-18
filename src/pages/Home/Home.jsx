@@ -1,11 +1,13 @@
 import "../../assets/css/Hero.css";
 import { useEffect, useContext } from "react";
+import { Link } from "react-router-dom";
 import HeroSection from "./HeroSection";
 import TestimonySection from "./TestimonySection";
 import CTAButton from "../../components/UI/Buttons/CTAButton";
 import RegistrationModal from "../../components/UI/Modals/RegistrationModal";
 import MobileRegistrationModal from "../../components/UI/Modals/MobileRegistrationModal";
 import { PopupContext } from "../../context/PopupContext";
+import { AuthContext } from "../../context/AuthContext";
 
 function Home() {
   const {
@@ -17,17 +19,23 @@ function Home() {
     setShowOverlay,
   } = useContext(PopupContext);
 
+  const { hasToken } = useContext(AuthContext);
+
   useEffect(() => {
-    if (window.innerWidth >= 1024) {
-      setTimeout(() => {
-        setShowDesktopPopup(!showDesktopPopup);
-        setShowOverlay(!showOverlay);
-      }, 5000);
+    if (!hasToken) {
+      if (window.innerWidth >= 1024) {
+        setTimeout(() => {
+          setShowDesktopPopup(!showDesktopPopup);
+          setShowOverlay(!showOverlay);
+        }, 5000);
+      } else {
+        setTimeout(() => {
+          setShowMobilePopup(!showMobilePopup);
+          setShowOverlay(!showOverlay);
+        }, 5000);
+      }
     } else {
-      setTimeout(() => {
-        setShowMobilePopup(!showMobilePopup);
-        setShowOverlay(!showOverlay);
-      }, 5000);
+      setShowOverlay(false);
     }
   }, []);
 
@@ -35,15 +43,23 @@ function Home() {
     <div className="flex flex-col items-center">
       <HeroSection />
 
-      <div className="pb-7 lg:pb-1">
-        <CTAButton text={"¡Quiero Comenzar!"} />
-      </div>
+      {!hasToken && (
+        <Link to="/login">
+          <div className="pb-7 lg:pb-1">
+            <CTAButton text={"¡Quiero Comenzar!"} />
+          </div>
+        </Link>
+      )}
 
       <TestimonySection />
 
-      <div className="pb-7 lg:pb-1">
-        <CTAButton text={"Agenda una Clase"} />
-      </div>
+      {!hasToken && (
+        <Link to="/contact">
+          <div className="pb-7 lg:pb-1">
+            <CTAButton text={"Agenda una Clase"} />
+          </div>
+        </Link>
+      )}
       <div className="w-full h-full justify-center items-center">
         {showDesktopPopup && (
           <RegistrationModal

@@ -4,10 +4,16 @@ export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({ isAuthenticated: false });
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [hasToken, setHasToken] = useState(false);
 
   const globalState = {
     user,
     setUser,
+    isAdmin,
+    setIsAdmin,
+    hasToken,
+    setHasToken,
   };
 
   useEffect(() => {

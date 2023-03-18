@@ -33,7 +33,7 @@ function AdminView() {
               <Button1 text={"Revisar Prácticas"} />
             </Link>
           </div>
-          <div className="flex flex-col items-center md:items-start my-5 mx-7 hidden">
+          <div className="flex flex-col items-center md:items-start my-5 mx-7">
             <Link to="/admin/usuarios">
               <Button1 text={"Lista Usuarios"} />
             </Link>
