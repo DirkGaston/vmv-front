@@ -54,6 +54,11 @@ yarn dev
 npm run dev
 ```
 
+## Credenciales de Administración
+
+admin@vmv.com
+garroshino
+
 ## Contacto 📫
 
 Si quieres ponerte en contacto conmigo, puedes localizarme a través de <dirkgaston87@gmail.com>.
