@@ -77,7 +77,7 @@
 
 @media only screen and (max-width: 570px) {
   .registration-modal {
-    top: 20vh;
+    top: 10vh;
     left: 15vw;
     width: 360px;
     height: 650px;
@@ -88,7 +88,7 @@
 
 @media only screen and (max-width: 470px) {
   .registration-modal {
-    top: 20vh;
+    top: 10vh;
     left: 5vw;
     width: 360px;
     height: 650px;
@@ -99,7 +99,7 @@
 
 @media only screen and (max-width: 400px) {
   .registration-modal {
-    top: 20vh;
+    top: 10vh;
     left: 0vw;
     width: 360px;
     height: 650px;

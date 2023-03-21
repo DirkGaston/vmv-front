@@ -12,9 +12,9 @@ function Accordion(props) {
   function handleToggle() {
     if (isOpen) {
       return {
-        maxHeight: "none",
-        borderWidth: "1px",
-        padding: "1em",
+        maxHeight: "250px",
+        borderWidth: "1px 0 0",
+        padding: 1,
       };
     } else {
       return {
@@ -34,10 +34,10 @@ function Accordion(props) {
   }
 
   return (
-    <li className="bg-white my-2 shadow-lg">
+    <li className="bg-gray-400 my-2 shadow-lg list-none">
       <h2
         onClick={handleClick}
-        className="flex flex-row justify-between items-center font-semibold p-3 cursor-pointer"
+        className="flex flex-row justify-between items-center font-josefin font-semibold text-xl p-3 cursor-pointer"
       >
         <span>{props.title}</span>
         <svg
@@ -48,11 +48,11 @@ function Accordion(props) {
         </svg>
       </h2>
       <div
-        className={`border-l-2 border-purple-600 overflow-hidden duration-500 transition-all`}
+        className={`border-t border-gray-300 overflow-hidden duration-500 transition-all`}
         style={handleToggle()}
         ref={tabRef}
       >
-        <p className="p-3 text-gray-900">{props.content}</p>
+        <p className="p-3 font-proxima text-gray-900">{props.content}</p>
       </div>
     </li>
   );

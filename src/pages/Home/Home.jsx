@@ -22,17 +22,21 @@ function Home() {
   const { hasToken } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!hasToken) {
+    const popupShown = localStorage.getItem("popupShown");
+
+    if (!popupShown && !hasToken) {
       if (window.innerWidth >= 1024) {
         setTimeout(() => {
           setShowDesktopPopup(!showDesktopPopup);
           setShowOverlay(!showOverlay);
         }, 5000);
+        localStorage.setItem("popupShown", true);
       } else {
         setTimeout(() => {
           setShowMobilePopup(!showMobilePopup);
           setShowOverlay(!showOverlay);
         }, 5000);
+        localStorage.setItem("popupShown", true);
       }
     } else {
       setShowOverlay(false);

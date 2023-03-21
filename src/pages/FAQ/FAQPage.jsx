@@ -1,15 +1,17 @@
 import Accordion from "../../components/UI/Accordion";
+import faq from "../../data/faq.json";
 
 function FAQPage() {
   return (
-    <div>
-      <h1>THIS IS THE FAQ PAGE</h1>
-      <Accordion
-        title={"Pregunta 1"}
-        content={
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis consectetur deleniti pariatur ad adipisci autem quasi architecto earum dolores quia placeat ullam magnam temporibus est, voluptate libero, iusto quaerat amet!"
-        }
-      />
+    <div className="flex flex-col w-full items-center">
+      <div className="flex flex-col items-center w-1/2">
+        <h1 className="font-josefin text-gray-200 text-3xl md:text-sxl uppercase mb-7 mt-10">
+          Preguntas Frecuentes
+        </h1>
+        {faq.map((faq) => (
+          <Accordion title={faq.title} content={faq.content} />
+        ))}
+      </div>
     </div>
   );
 }
