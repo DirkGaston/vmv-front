@@ -1,19 +1,17 @@
 import axios from "axios";
 import { AESDecrypt } from "../../utils/Encrypt";
+import { API_BASE_URL, API_VERSION } from "../api.config";
 
 export async function GetExercises() {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
-    const res = await axios.get(
-      "https://run.mocky.io/v3/4497928d-849b-4ae1-a25c-03ca0a5444c2",
-      {
-        headers: {
-          Authorization: `Bearer ${decryptedToken}`,
-        },
-      }
-    );
+    const res = await axios.get(`${API_BASE_URL}${API_VERSION}/exercises/`, {
+      headers: {
+        Authorization: `Bearer ${decryptedToken}`,
+      },
+    });
 
     return res.data;
   } catch (err) {
@@ -23,7 +21,7 @@ export async function GetExercises() {
 
 export async function GetExercise(id) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.get(
@@ -43,16 +41,24 @@ export async function GetExercise(id) {
 
 export async function AddExercise(exercise) {
   try {
+    const token = localStorage.getItem("accessToken");
+    const decryptedToken = AESDecrypt(token);
+
     const newExercise = {
       title: exercise.title,
+      video_url: exercise.videoURL,
       description: exercise.description,
-      video_url: exercise.video_url,
     };
     const res = await axios.post(
-      "https://run.mocky.io/v3/fff1e720-4850-4904-af29-cb1a20b4fbc4",
-      newExercise
+      `${API_BASE_URL}${API_VERSION}/exercises/`,
+      newExercise,
+      {
+        headers: {
+          Authorization: `Bearer ${decryptedToken}`,
+        },
+      }
     );
-    return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -60,7 +66,7 @@ export async function AddExercise(exercise) {
 
 export async function UpdateExercise(id, updatedExercise) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.patch(
@@ -81,7 +87,7 @@ export async function UpdateExercise(id, updatedExercise) {
 
 export async function DeleteExercise(id) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.delete(

@@ -5,6 +5,7 @@ import { NavbarProvider } from "./context/NavbarContext";
 import { AuthProvider } from "./context/AuthContext";
 import { ExerciseProvider } from "./context/ExerciseContext";
 import { PopupProvider } from "./context/PopupContext";
+import { ToastContainer } from "react-toastify";
 
 import PageLayout from "./layout/PageLayout";
 
@@ -17,6 +18,7 @@ const App = () => {
           <ExerciseProvider>
             <PopupProvider>
               <BrowserRouter>
+                <ToastContainer />
                 <PageLayout />
               </BrowserRouter>
             </PopupProvider>

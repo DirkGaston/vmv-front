@@ -1,9 +1,10 @@
 import { useState, useContext, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { UserLogout } from "../api/auth/auth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-import "../assets/css/navbar.css";
+import "../assets/css/Navbar.css";
 
 import { NavbarContext } from "../context/NavbarContext";
 import { AuthContext } from "../context/AuthContext";
@@ -11,26 +12,22 @@ import { AuthContext } from "../context/AuthContext";
 export default function Navbar() {
   const { navbarOpen, setNavbarOpen } = useContext(NavbarContext);
 
-  const { isAdmin, setIsAdmin, hasToken, setHasToken } =
-    useContext(AuthContext);
+  const { role, setRole, hasToken, setHasToken } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const logoutIcon = <FontAwesomeIcon icon={faArrowRightFromBracket} />;
 
   function handleLogout() {
+    UserLogout(localStorage.getItem("accessToken"));
     localStorage.clear();
     setHasToken(false);
-    setIsAdmin(false);
+    setRole(null);
     navigate("/login");
   }
 
   useEffect(() => {
-    if (localStorage.getItem("isAdmin")) {
-      setIsAdmin(true);
-    }
-
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("accessToken")) {
       setHasToken(true);
     }
   }, []);
@@ -42,11 +39,7 @@ export default function Navbar() {
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <NavLink to={"/"}>
           <div className="flex items-center">
-            <img
-              src="/img/vmv-logo.png"
-              className="h-12 mr-3"
-              alt="VMV Logo"
-            />
+            <img src="/img/vmv-logo.png" className="h-12 mr-3" alt="VMV Logo" />
             <span className="self-center text-lg text-white font-proxima font-semibold whitespace-nowrap">
               Vanessa Medo Vocals
             </span>
@@ -156,7 +149,7 @@ export default function Navbar() {
                 </span>
               </NavLink>
             </li>
-            {!isAdmin && !hasToken && (
+            {!role && !hasToken && (
               <li className="nav-item flex">
                 <NavLink
                   to={"/login"}
@@ -173,7 +166,7 @@ export default function Navbar() {
                 </NavLink>
               </li>
             )}
-            {!isAdmin && hasToken && (
+            {role && role !== "admin" && hasToken && (
               <li className="nav-item flex">
                 <NavLink
                   to={"/user"}
@@ -188,7 +181,7 @@ export default function Navbar() {
                 </NavLink>
               </li>
             )}
-            {isAdmin && (
+            {role === "admin" && (
               <li className="nav-item flex">
                 <NavLink
                   to={"/admin"}
@@ -205,7 +198,7 @@ export default function Navbar() {
                 </NavLink>
               </li>
             )}
-            {hasToken && (
+            {role && hasToken && (
               <li className="nav-item flex">
                 <button
                   className="text-white font-proxima font-bold italic px-3 py-2 flex items-center text-xl focus:outline-none"

@@ -1,28 +1,62 @@
 import axios from "axios";
 import { AESEncrypt, AESDecrypt } from "../../utils/Encrypt";
+import { API_BASE_URL, API_VERSION } from "../api.config";
+import jwtDecode from "jwt-decode";
 
-export async function UserLogin(email, password) {
+export async function UserLogin(email, password, setRole, setUser) {
   try {
     const payload = {
       email,
       password,
     };
     const res = await axios.post(
-      "https://run.mocky.io/v3/9eab2033-a976-4d8e-bc44-49f990b3e786",
+      `${API_BASE_URL}${API_VERSION}/auth/login`,
       payload
     );
     const data = res.data;
 
-    const isAdmin = email === "admin@vmv.com" && password === "garroshino";
-    if (isAdmin) {
-      localStorage.setItem("isAdmin", true);
-    } else {
-      localStorage.removeItem("isAdmin");
-    }
+    const { accessToken, refreshToken } = data.data;
 
-    localStorage.setItem("token", AESEncrypt(data.token));
+    const decodedToken = jwtDecode(accessToken);
+
+    console.log(decodedToken);
+
+    const { role, id } = decodedToken;
+
+    console.log(role);
+    console.log(id);
+
+    setRole(role);
+    setUser((prevUser) => ({
+      ...prevUser,
+      id: id,
+    }));
+
+    localStorage.setItem("accessToken", AESEncrypt(accessToken));
+    localStorage.setItem("refreshToken", AESEncrypt(refreshToken));
     console.log(data);
-    return data;
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function UserLogout(accessToken) {
+  try {
+    const decryptedToken = AESDecrypt(accessToken);
+    const res = await axios.post(
+      `${API_BASE_URL}${API_VERSION}/auth/logout`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${decryptedToken}`,
+        },
+      }
+    );
+
+    const data = res.data;
+
+    console.log(data);
   } catch (err) {
     console.log(err);
   }
@@ -30,15 +64,15 @@ export async function UserLogin(email, password) {
 
 export async function GetUsers() {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
-    const res = await axios.get("/auth.json", {
+    const res = await axios.get(`${API_BASE_URL}${API_VERSION}/users/`, {
       headers: {
-        Authorization: `Bearer ${decryptedToken}`,
+        Authorization: ` ${decryptedToken}`,
       },
     });
-    const data = res.data.user;
+    const data = res.data;
     console.log(data);
     return res.data;
   } catch (err) {
@@ -48,36 +82,52 @@ export async function GetUsers() {
 
 export async function GetUser(id) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
-    const res = await axios.get(
-      `https://run.mocky.io/v3/e6b48a6c-eee6-4385-91a8-322c4e254b06/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${decryptedToken}`,
-        },
-      }
-    );
+    const decodedToken = jwtDecode(decryptedToken);
+    const id = decodedToken.ID;
+
+    const res = await axios.get(`${API_BASE_URL}${API_VERSION}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${decryptedToken}`,
+      },
+    });
 
     return res.data;
+    console.log(data);
   } catch (err) {
     console.log(err);
   }
 }
 
-export async function RegisterUser(user) {
+export async function RegisterUser(
+  username,
+  email,
+  password,
+  setRole,
+  setUser
+) {
   try {
-    const newUser = {
-      name: user.name,
-      email: user.email,
-      password: user.password,
+    const payload = {
+      username,
+      email,
+      password,
     };
     const res = await axios.post(
-      "https://run.mocky.io/v3/fff1e720-4850-4904-af29-cb1a20b4fbc4",
-      newUser
+      `${API_BASE_URL}${API_VERSION}/users/`,
+      payload
     );
-    return res.data;
+    const data = res.data;
+    const registeredUser = data.data;
+
+    const loginData = await UserLogin(email, password, setRole, setUser);
+
+    return {
+      ...registeredUser,
+      accessToken: loginData.data.accessToken,
+      refreshToken: loginData.data.refreshToken,
+    };
   } catch (err) {
     console.log(err);
   }
@@ -85,11 +135,11 @@ export async function RegisterUser(user) {
 
 export async function UpdateUser(id, updatedUser) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.patch(
-      `https://run.mocky.io/v3/e6b48a6c-eee6-4385-91a8-322c4e254b06/${id}`,
+      `${API_BASE_URL}${API_VERSION}/users/${id}`,
       updatedUser,
       {
         headers: {
@@ -106,7 +156,7 @@ export async function UpdateUser(id, updatedUser) {
 
 export async function DeleteUser(id) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.delete(

@@ -1,6 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function SocialMediaForm() {
+function SocialMediaForm({
+  instagramLink,
+  setInstagramLink,
+  facebookLink,
+  setFacebookLink,
+  tiktokLink,
+  setTiktokLink,
+  youtubeLink,
+  setYoutubeLink,
+}) {
   return (
     <div className="flex flex-col md:flex-row justify-between">
       <div className="flex flex-col items-center md:items-start">
@@ -16,6 +25,8 @@ function SocialMediaForm() {
               />
               <input
                 id="instagram"
+                value={instagramLink}
+                onChange={(e) => setInstagramLink(e.target.value)}
                 className="block pr-10 shadow appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
               />
             </div>
@@ -28,7 +39,9 @@ function SocialMediaForm() {
                 icon={["fab", "facebook"]}
               />
               <input
-                id="instagram"
+                id="facebook"
+                value={facebookLink}
+                onChange={(e) => setFacebookLink(e.target.value)}
                 className="block pr-10 shadow appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
               />
             </div>
@@ -40,7 +53,9 @@ function SocialMediaForm() {
                 icon={["fab", "tiktok"]}
               />
               <input
-                id="instagram"
+                id="tiktok"
+                value={tiktokLink}
+                onChange={(e) => setTiktokLink(e.target.value)}
                 className="block pr-10 shadow appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
               />
             </div>
@@ -52,7 +67,9 @@ function SocialMediaForm() {
                 icon={["fab", "youtube"]}
               />
               <input
-                id="instagram"
+                id="youtube"
+                value={youtubeLink}
+                onChange={(e) => setYoutubeLink(e.target.value)}
                 className="block pr-10 shadow appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
               />
             </div>

@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { GetExercises } from "../api/exercises/exercises";
 import axios from "axios";
 
 export const ExerciseContext = createContext({});
@@ -7,9 +8,11 @@ export const ExerciseProvider = ({ children }) => {
   const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
-    axios.get("/data/exercises.json").then((res) => {
-      setExercises(res.data);
-    });
+    const fetchExercises = async () => {
+      const data = await GetExercises();
+      setExercises(data);
+    };
+    fetchExercises();
   }, []);
 
   const globalState = {

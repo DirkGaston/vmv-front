@@ -1,11 +1,19 @@
+import { useState, useContext } from "react";
 import UserIcon from "../../../components/Icons/UserIcon";
 import LockIcon from "../../../components/Icons/LockIcon";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { RegisterUser } from "../../../api/auth/auth";
+import { AuthContext } from "../../../context/AuthContext";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RegistrationForm() {
+  const { setUser, setRole } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const schema = yup
     .object({
       username: yup.string().required(),
@@ -27,10 +35,28 @@ function RegistrationForm() {
 
   const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    navigate("/user");
+  const onSubmit = async (data) => {
+    try {
+      const response = await RegisterUser(
+        data.username,
+        data.email,
+        data.password,
+        setRole,
+        setUser
+      );
+      console.log(response);
+      if (response && response.status === 200) {
+        navigate("/user");
+        toast.success("Registro realizado con éxito!");
+      } else {
+        toast.error("Registro ha fallado...");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Registro ha fallado...");
+    }
   };
+
   return (
     <form method="POST" action="#login" onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-8 px-5">
@@ -53,7 +79,7 @@ function RegistrationForm() {
         </div>
         {errors.username && (
           <p className="text-sm text-red-500 text-left font-proxima font-regular">
-            Campo Requerido!
+            {errors.username.message}
           </p>
         )}
       </div>
@@ -79,7 +105,7 @@ function RegistrationForm() {
         </div>
         {errors.email && (
           <p className="text-sm text-red-500 text-left font-proxima font-regular">
-            Campo Requerido!
+            {errors.email.message}
           </p>
         )}
       </div>
@@ -100,13 +126,13 @@ function RegistrationForm() {
             {...register("password", { required: true })}
             name="password"
             id="password"
-            type="text"
+            type="password"
             className="block pr-10 shadow appearance-none border-2 border-orange-100 rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
           />
         </div>
         {errors.password && (
           <p className="text-sm text-red-500 text-left font-proxima font-regular">
-            Campo Requerido!
+            {errors.password.message}
           </p>
         )}
       </div>

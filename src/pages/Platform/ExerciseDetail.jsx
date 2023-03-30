@@ -18,11 +18,7 @@ function ExerciseDetail() {
   return (
     <div className="flex flex-col items-center mt-10">
       <div className="w-full md:w-min">
-        <VideoPlayer
-          url={
-            "https://www.youtube.com/watch?v=9sz7MHtuhp8&ab_channel=VanessaMedo"
-          }
-        />
+        <VideoPlayer url={exercise.video_url} />
       </div>
       <div className="text-gray-200 flex flex-col items-center my-7 w-3/4">
         <h2 className="font-josefin text-4xl">{exercise.title}</h2>

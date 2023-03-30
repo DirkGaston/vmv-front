@@ -3,7 +3,7 @@ import { AESDecrypt } from "../../utils/Encrypt";
 
 export async function GetSongs() {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.get(
@@ -42,7 +42,7 @@ export async function AddSong(song) {
 
 export async function UpdateSong(id, updatedSong) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.patch(
@@ -63,7 +63,7 @@ export async function UpdateSong(id, updatedSong) {
 
 export async function DeleteSong(id) {
   try {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("accessToken");
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.delete(

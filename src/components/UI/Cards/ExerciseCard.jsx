@@ -14,7 +14,7 @@ function ExerciseCard({ exercise }) {
       <a onClick={goToDetailPage}>
         <img
           className="rounded-t-lg cursor-pointer"
-          src={exercise.image}
+          src={exercise.image_url}
           alt={exercise.title}
         />
       </a>
