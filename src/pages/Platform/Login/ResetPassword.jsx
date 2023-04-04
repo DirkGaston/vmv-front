@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ForgotPasswordRequest } from "../../../api/auth/auth";
+// import { ForgotPasswordRequest } from "../../../api/auth/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -28,24 +28,24 @@ function ResetPassword({ email, setShowResetPassword }) {
     },
   });
 
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    try {
-      const response = await ForgotPasswordRequest(data.email);
-      if (response && response.status === 200) {
-        toast.success(
-          "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña."
-        );
-        setShowResetPassword(false);
-      } else {
-        toast.error("No se pudo restablecer la contraseña en este momento.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("No se pudo restablecer la contraseña en este momento.");
-    }
-    setIsSubmitting(false);
-  };
+//   const onSubmit = async (data) => {
+//     setIsSubmitting(true);
+//     try {
+//       const response = await ForgotPasswordRequest(data.email);
+//       if (response && response.status === 200) {
+//         toast.success(
+//           "Se ha enviado un correo electrónico con instrucciones para restablecer la contraseña."
+//         );
+//         setShowResetPassword(false);
+//       } else {
+//         toast.error("No se pudo restablecer la contraseña en este momento.");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       toast.error("No se pudo restablecer la contraseña en este momento.");
+//     }
+//     setIsSubmitting(false);
+//   };
 
   return (
     <div className="bg-gray-900 bg-opacity-50 absolute top-0 left-0 w-screen h-screen z-10 flex items-center justify-center">
