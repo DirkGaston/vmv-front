@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RegistrationForm() {
-  const { setUser } = useContext(AuthContext);
+  const { setUser, hasToken, setHasToken } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const schema = yup
@@ -44,6 +44,12 @@ function RegistrationForm() {
         setUser
       );
       if (response && response.status === 200) {
+        setUser({ isAuthenticated: true });
+
+        if (localStorage.getItem("accessToken")) {
+          setHasToken(true);
+        }
+
         navigate("/user");
         toast.success("Registro realizado con éxito!");
       } else {
