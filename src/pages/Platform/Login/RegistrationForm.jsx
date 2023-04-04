@@ -43,9 +43,8 @@ function RegistrationForm() {
         data.password,
         setUser
       );
-      if (response && response.status === 200) {
-        setUser({ isAuthenticated: true });
 
+      if (response && response.status === 200) {
         if (localStorage.getItem("accessToken")) {
           setHasToken(true);
         }
