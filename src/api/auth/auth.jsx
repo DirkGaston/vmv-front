@@ -132,7 +132,7 @@ export async function UpdateUser(id, updatedUser) {
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.patch(
-      `${API_BASE_URL}${API_VERSION}/users/${id}`,
+      `${API_BASE_URL}${API_VERSION}users/${id}`,
       updatedUser,
       {
         headers: {
@@ -140,7 +140,7 @@ export async function UpdateUser(id, updatedUser) {
         },
       }
     );
-
+    console.log(res);
     return res;
   } catch (err) {
     console.log(err);
