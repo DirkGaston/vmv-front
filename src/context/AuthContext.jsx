@@ -8,16 +8,17 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
     isAuthenticated: false,
     id: null,
+    role: null,
     email: null,
+    username: null,
+    firstName: null,
   });
-  const [role, setRole] = useState(null);
+
   const [hasToken, setHasToken] = useState(false);
 
   const globalState = {
     user,
     setUser,
-    role,
-    setRole,
     hasToken,
     setHasToken,
   };
@@ -28,13 +29,15 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       const decryptedToken = AESDecrypt(token);
       const decodedToken = jwtDecode(decryptedToken);
-      const { id, email } = decodedToken;
-      console.log(`User ID: ${id}`);
+      const { id, email, role, username, firstName } = decodedToken;
       setUser((prevUser) => ({
         ...prevUser,
         isAuthenticated: true,
         id: id,
         email: email,
+        role: role,
+        username: username,
+        firstName: firstName,
       }));
     }
   }, [token]);

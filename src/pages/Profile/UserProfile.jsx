@@ -14,7 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 library.add(fab);
 
 function UserProfile() {
-  const { user, role } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const { role } = user ? user : { role: null };
 
   const [username, setUsername] = useState("");
   const [birthday, setBirthday] = useState("");
@@ -36,7 +37,19 @@ function UserProfile() {
 
   const id = user.id;
 
-  console.log(id);
+  const resetInputFields = () => {
+    setUsername("");
+    setBirthday("");
+    setFirstName("");
+    setLastName("");
+    setPhoneNumber("");
+    setEmergencyContactName("");
+    setEmergencyContactPhone("");
+    setInstagramLink("");
+    setFacebookLink("");
+    setTiktokLink("");
+    setYoutubeLink("");
+  };
 
   const handleUpdateUser = async () => {
     const updatedUser = {
@@ -50,9 +63,14 @@ function UserProfile() {
     };
 
     try {
-      const data = await UpdateUser(user.id, updatedUser);
-      console.log(data);
-      toast.success("Tus datos se han actualizado con éxito!");
+      const response = await UpdateUser(user.id, updatedUser);
+      console.log(response);
+      if (response.status === 200 || response.status === 204) {
+        toast.success("Tus datos se han actualizado con éxito!");
+        resetInputFields();
+      } else {
+        toast.error("Hubo un error al actualizar tus datos...");
+      }
     } catch (err) {
       console.log(err);
       toast.error("Hubo un error al actualizar tus datos...");
@@ -68,10 +86,14 @@ function UserProfile() {
     };
 
     try {
-      console.log(updatedUser);
-      const data = await UpdateUser(user.id, updatedUser);
-      console.log(data);
-      toast.success("Tus redes se han actualizado con éxito!");
+      const response = await UpdateUser(user.id, updatedUser);
+      console.log(response);
+      if (response.status === 200 || response.status === 204) {
+        toast.success("Tus redes se han actualizado con éxito!");
+        resetInputFields();
+      } else {
+        toast.error("Hubo un error al actualizar tus redes...");
+      }
     } catch (err) {
       console.log(err);
       toast.error("Hubo un error al actualizar tus redes...");
@@ -80,12 +102,12 @@ function UserProfile() {
 
   if (!user.id) {
     return (
-      <div class="flex flex-col items-center justify-center space-x-2 my-10">
+      <div className="flex flex-col items-center justify-center space-x-2 my-10">
         <div
-          class="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-amber-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-amber-400 border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
           role="status"
         >
-          <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+          <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
             Loading...
           </span>
         </div>
@@ -109,7 +131,7 @@ function UserProfile() {
         <div className="flex flex-col md:flex-row items-center md:justify-start font-proxima text-gray-200 text-center my-7">
           <img
             className="w-[300px] h-[300px] rounded-full md:mr-[70px] mb-5 md:mb-0"
-            src="https://assets.stickpng.com/images/610e8796f8bb190004769dcd.png"
+            src="/img/610e8796f8bb190004769dcd.png"
             alt="userPhoto"
           />
           {role === "student" && (

@@ -25,7 +25,7 @@ export async function GetExercise(id) {
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.get(
-      `https://run.mocky.io/v3/4497928d-849b-4ae1-a25c-03ca0a5444c2/${id}`,
+      `${API_BASE_URL}${API_VERSION}/exercises/${id}`,
       {
         headers: {
           Authorization: `Bearer ${decryptedToken}`,
@@ -47,6 +47,7 @@ export async function AddExercise(exercise) {
     const newExercise = {
       title: exercise.title,
       video_url: exercise.videoURL,
+      image_url: exercise.imageURL,
       description: exercise.description,
     };
     const res = await axios.post(
@@ -70,7 +71,7 @@ export async function UpdateExercise(id, updatedExercise) {
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.patch(
-      `https://run.mocky.io/v3/fff1e720-4850-4904-af29-cb1a20b4fbc4/${id}`,
+      `${API_BASE_URL}${API_VERSION}exercises/${id}`,
       updatedExercise,
       {
         headers: {
@@ -79,9 +80,16 @@ export async function UpdateExercise(id, updatedExercise) {
       }
     );
 
-    return res.data;
+    return res;
   } catch (err) {
-    console.log(err);
+    if (err.response) {
+      console.log("Error response:", err.response);
+    } else if (err.request) {
+      console.log("Error request:", err.request);
+    } else {
+      console.log("Error message:", err.message);
+    }
+    throw err;
   }
 }
 
@@ -91,7 +99,7 @@ export async function DeleteExercise(id) {
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.delete(
-      `https://run.mocky.io/v3/fff1e720-4850-4904-af29-cb1a20b4fbc4/${id}`,
+      `${API_BASE_URL}${API_VERSION}/exercises/${id}`,
       {
         headers: {
           Authorization: `Bearer ${decryptedToken}`,
@@ -99,7 +107,7 @@ export async function DeleteExercise(id) {
       }
     );
 
-    return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }

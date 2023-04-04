@@ -1,25 +1,45 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Button2 from "../../../components/UI/Buttons/Button2";
-import { AddExercise } from "../../../api/exercises/exercises";
+import { AddExercise, GetExercises } from "../../../api/exercises/exercises";
+import { ExerciseContext } from "../../../context/ExerciseContext";
+import { useNavigate } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ExerciseUploadForm() {
   const [title, setTitle] = useState("");
   const [videoURL, setVideoURL] = useState("");
+  const [imageURL, setImageURL] = useState("");
   const [description, setDescription] = useState("");
+
+  const { exercises, setExercises } = useContext(ExerciseContext);
+
+  const navigate = useNavigate();
+
+  async function fetchAndSetExercises(setExercises) {
+    try {
+      const exercises = await GetExercises();
+      setExercises(exercises);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   const onSubmit = async (data) => {
     try {
       const exercise = {
         title: title,
         videoURL: videoURL,
+        imageURL: imageURL,
         description: description,
       };
       const response = await AddExercise(exercise);
-      console.log(response);
+
       if (response && response.status === 200) {
         toast.success("Ejercicio añadido con éxito!");
+        await fetchAndSetExercises(setExercises);
+        navigate(`/ejercicios`);
       } else {
         toast.error("Registro del ejercicio ha fallado...");
       }
@@ -64,6 +84,23 @@ function ExerciseUploadForm() {
             id="file_upload"
             value={videoURL}
             onChange={(e) => setVideoURL(e.target.value)}
+            className="block pr-10 shadow appearance-none border-2 border-orange-100 bg-white rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
+          />
+        </div>
+      </div>
+      <div className="mb-8">
+        <label
+          htmlFor="file_upload"
+          className="block text-gray-200 text-sm font-bold mb-2 font-josefin"
+        >
+          URL de la Imágen
+        </label>
+        <div className="mt-1 relative rounded-md shadow-sm">
+          <input
+            name="file_upload"
+            id="file_upload"
+            value={imageURL}
+            onChange={(e) => setImageURL(e.target.value)}
             className="block pr-10 shadow appearance-none border-2 border-orange-100 bg-white rounded w-full py-2 px-4 text-gray-700 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-orange-500 transition duration-500 ease-in-out"
           />
         </div>

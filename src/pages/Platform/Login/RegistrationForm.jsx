@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function RegistrationForm() {
-  const { setUser, setRole } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const schema = yup
@@ -41,10 +41,8 @@ function RegistrationForm() {
         data.username,
         data.email,
         data.password,
-        setRole,
         setUser
       );
-      console.log(response);
       if (response && response.status === 200) {
         navigate("/user");
         toast.success("Registro realizado con éxito!");

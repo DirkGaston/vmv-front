@@ -3,7 +3,7 @@ import { AESEncrypt, AESDecrypt } from "../../utils/Encrypt";
 import { API_BASE_URL, API_VERSION } from "../api.config";
 import jwtDecode from "jwt-decode";
 
-export async function UserLogin(email, password, setRole, setUser) {
+export async function UserLogin(email, password, setUser) {
   try {
     const payload = {
       email,
@@ -21,15 +21,14 @@ export async function UserLogin(email, password, setRole, setUser) {
 
     console.log(decodedToken);
 
-    const { role, id } = decodedToken;
+    const { role, id, username, firstName } = decodedToken;
 
-    console.log(role);
-    console.log(id);
-
-    setRole(role);
     setUser((prevUser) => ({
       ...prevUser,
       id: id,
+      role: role,
+      username: username,
+      firstName: firstName,
     }));
 
     localStorage.setItem("accessToken", AESEncrypt(accessToken));
@@ -69,7 +68,7 @@ export async function GetUsers() {
 
     const res = await axios.get(`${API_BASE_URL}${API_VERSION}/users/`, {
       headers: {
-        Authorization: ` ${decryptedToken}`,
+        Authorization: `Bearer ${decryptedToken}`,
       },
     });
     const data = res.data;
@@ -95,19 +94,12 @@ export async function GetUser(id) {
     });
 
     return res.data;
-    console.log(data);
   } catch (err) {
     console.log(err);
   }
 }
 
-export async function RegisterUser(
-  username,
-  email,
-  password,
-  setRole,
-  setUser
-) {
+export async function RegisterUser(username, email, password, setUser) {
   try {
     const payload = {
       username,
@@ -121,7 +113,7 @@ export async function RegisterUser(
     const data = res.data;
     const registeredUser = data.data;
 
-    const loginData = await UserLogin(email, password, setRole, setUser);
+    const loginData = await UserLogin(email, password, setUser);
 
     return {
       ...registeredUser,
@@ -148,7 +140,7 @@ export async function UpdateUser(id, updatedUser) {
       }
     );
 
-    return res.data;
+    return res;
   } catch (err) {
     console.log(err);
   }
@@ -160,7 +152,7 @@ export async function DeleteUser(id) {
     const decryptedToken = AESDecrypt(token);
 
     const res = await axios.delete(
-      `https://run.mocky.io/v3/e6b48a6c-eee6-4385-91a8-322c4e254b06/${id}`,
+      `${API_BASE_URL}${API_VERSION}/users/${id}`,
       {
         headers: {
           Authorization: `Bearer ${decryptedToken}`,
@@ -169,6 +161,18 @@ export async function DeleteUser(id) {
     );
 
     return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function ResetPasswordRequest(email) {
+  try {
+    const res = await axios.post(
+      `${API_BASE_URL}${API_VERSION}auth/reset-password`,
+      { email }
+    );
+    return res;
   } catch (err) {
     console.log(err);
   }

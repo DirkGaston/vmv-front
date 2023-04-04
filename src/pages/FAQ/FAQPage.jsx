@@ -8,8 +8,8 @@ function FAQPage() {
         <h1 className="font-josefin text-gray-200 text-3xl md:text-sxl uppercase mb-7 mt-10">
           Preguntas Frecuentes
         </h1>
-        {faq.map((faq) => (
-          <Accordion title={faq.title} content={faq.content} />
+        {faq.map((faq, index) => (
+          <Accordion key={index} title={faq.title} content={faq.content} />
         ))}
       </div>
     </div>

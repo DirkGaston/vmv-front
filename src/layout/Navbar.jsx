@@ -12,7 +12,9 @@ import { AuthContext } from "../context/AuthContext";
 export default function Navbar() {
   const { navbarOpen, setNavbarOpen } = useContext(NavbarContext);
 
-  const { role, setRole, hasToken, setHasToken } = useContext(AuthContext);
+  const { user, setUser, hasToken, setHasToken } = useContext(AuthContext);
+
+  const { role } = user ? user : { role: null };
 
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ export default function Navbar() {
     UserLogout(localStorage.getItem("accessToken"));
     localStorage.clear();
     setHasToken(false);
-    setRole(null);
+    setUser(null);
     navigate("/login");
   }
 
@@ -35,7 +37,7 @@ export default function Navbar() {
   const genericHamburgerLine = `h-1 w-6 my-1 rounded-full bg-white transition ease transform duration-300`;
 
   return (
-    <nav className="sticky top-0 flex min-w-full items-center justify-between px-2 sm:px-4">
+    <nav className="sticky top-0 flex min-w-full items-center justify-between px-2 sm:px-4 z-50">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
         <NavLink to={"/"}>
           <div className="flex items-center">

@@ -6,7 +6,7 @@ import "../assets/css/Layout.css";
 function PageLayout() {
   return (
     <div className="PageLayout">
-      <div className="navbar-container sticky top-0 bg-black bg-opacity-60">
+      <div className="navbar-container sticky top-0 bg-black bg-opacity-70 z-10">
         <Navbar />
       </div>
       <MainLayout />

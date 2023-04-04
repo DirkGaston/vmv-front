@@ -2,8 +2,9 @@ import { useState, useContext } from "react";
 import UserIcon from "../../../components/Icons/UserIcon";
 import LockIcon from "../../../components/Icons/LockIcon";
 import { UserLogin } from "../../../api/auth/auth";
+import ResetPassword from "./ResetPassword";
 import { AuthContext } from "../../../context/AuthContext";
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -11,9 +12,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm() {
-  const { setUser, setHasToken, setRole } = useContext(AuthContext);
+  const { setUser, setHasToken } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showResetPassword, setShowResetPassword] = useState(false);
 
   const schema = yup
     .object({
@@ -35,15 +37,15 @@ function LoginForm() {
 
   const navigate = useNavigate();
 
+  const handleForgotPassword = () => {
+    setShowResetPassword(true);
+  };
+
   const onSubmit = async (data) => {
     try {
-      const response = await UserLogin(
-        data.email,
-        data.password,
-        setRole,
-        setUser
-      );
-      console.log(response);
+      const response = await UserLogin(data.email, data.password, setUser);
+      const role = response.data.data.role;
+
       if (response && response.status === 200) {
         setUser({ isAuthenticated: true });
 
@@ -51,7 +53,10 @@ function LoginForm() {
           setHasToken(true);
         }
 
-        navigate(response.data.role === "admin" ? "/admin" : "/user");
+        setTimeout(() => {
+          navigate(response.data.data.role === "admin" ? "/admin" : "/user");
+        }, 0);
+
         toast.success("Login realizado con éxito!");
       } else {
         if (response.status === 401) {
@@ -125,6 +130,13 @@ function LoginForm() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <button
+            type="button"
+            className="text-sm text-gray-200 hover:text-white hover:underline cursor-pointer focus:outline-none"
+            onClick={handleForgotPassword}
+          >
+            ¿Olvidaste tu contraseña?
+          </button>
           {errors.password && (
             <p className="text-sm text-red-500 text-left font-proxima font-regular">
               {errors.password.message}
@@ -141,6 +153,12 @@ function LoginForm() {
           </button>
         </div>
       </form>
+      {showResetPassword && (
+        <ResetPassword
+          email={email}
+          setShowResetPassword={setShowResetPassword}
+        />
+      )}
     </div>
   );
 }

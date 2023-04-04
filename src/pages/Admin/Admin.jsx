@@ -24,6 +24,11 @@ function AdminView() {
         </p>
         <div className="flex justify-center mb-10">
           <div className="flex flex-col items-center md:items-start my-5 mx-7">
+            <Link to="/ejercicios">
+              <Button1 text={"Ver Ejercicios"} />
+            </Link>
+          </div>
+          <div className="flex flex-col items-center md:items-start my-5 mx-7">
             <Link to="/admin/ejercicios">
               <Button1 text={"Subir Ejercicios"} />
             </Link>
