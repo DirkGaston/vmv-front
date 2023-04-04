@@ -14,7 +14,7 @@ import "react-toastify/dist/ReactToastify.css";
 library.add(fab);
 
 function UserProfile() {
-  const { user } = useContext(AuthContext);
+  const { user, setUser } = useContext(AuthContext);
   const { role } = user ? user : { role: null };
 
   const [username, setUsername] = useState("");
@@ -67,6 +67,7 @@ function UserProfile() {
       console.log(response);
       if (response.status === 200 || response.status === 204) {
         toast.success("Tus datos se han actualizado con éxito!");
+        setUser(response.data.data);
         resetInputFields();
       } else {
         toast.error("Hubo un error al actualizar tus datos...");
