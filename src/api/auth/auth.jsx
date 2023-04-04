@@ -116,6 +116,7 @@ export async function RegisterUser(username, email, password, setUser) {
     const loginData = await UserLogin(email, password, setUser);
 
     return {
+      status: res.status,
       ...registeredUser,
       accessToken: loginData.data.accessToken,
       refreshToken: loginData.data.refreshToken,
