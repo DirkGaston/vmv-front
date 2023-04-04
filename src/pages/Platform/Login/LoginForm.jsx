@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import UserIcon from "../../../components/Icons/UserIcon";
 import LockIcon from "../../../components/Icons/LockIcon";
 import { UserLogin } from "../../../api/auth/auth";
-import ResetPassword from "./ResetPassword";
+// import ResetPassword from "./ResetPassword";
 import { AuthContext } from "../../../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -153,12 +153,12 @@ function LoginForm() {
           </button>
         </div>
       </form>
-      {showResetPassword && (
+      {/* {showResetPassword && (
         <ResetPassword
           email={email}
           setShowResetPassword={setShowResetPassword}
         />
-      )}
+      )} */}
     </div>
   );
 }
