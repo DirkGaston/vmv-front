@@ -10,7 +10,7 @@ export async function UserLogin(email, password, setUser) {
       password,
     };
     const res = await axios.post(
-      `${API_BASE_URL}${API_VERSION}/auth/login`,
+      `${API_BASE_URL}${API_VERSION}auth/login`,
       payload
     );
     const data = res.data;
@@ -44,7 +44,7 @@ export async function UserLogout(accessToken) {
   try {
     const decryptedToken = AESDecrypt(accessToken);
     const res = await axios.post(
-      `${API_BASE_URL}${API_VERSION}/auth/logout`,
+      `${API_BASE_URL}${API_VERSION}auth/logout`,
       {},
       {
         headers: {
@@ -107,7 +107,7 @@ export async function RegisterUser(username, email, password, setUser) {
       password,
     };
     const res = await axios.post(
-      `${API_BASE_URL}${API_VERSION}/users/`,
+      `${API_BASE_URL}${API_VERSION}users/`,
       payload
     );
     const data = res.data;
